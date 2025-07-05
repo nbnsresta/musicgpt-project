@@ -1,34 +1,37 @@
+"use client";
+
 import React from "react";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline";
-  size?: "sm" | "md" | "lg";
+  variant?: "outline" | "submit";
+  size?: "sm" | "md" | "lg" | "reset";
   children: React.ReactNode;
   asChild?: boolean;
 }
 
 export const Button = ({
-  variant = "primary",
-  size = "md",
+  variant = "outline",
+  size = "sm",
   children,
   className = "",
   asChild = false,
   ...props
 }: ButtonProps) => {
   const baseClasses =
-    "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background";
+    "inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background cursor-pointer";
 
   const variantClasses = {
-    primary: "bg-primary text-primary-foreground hover:bg-primary/90",
-    secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-    outline: "border border-input hover:bg-accent hover:text-accent-foreground",
+    outline:
+      "border border-input hover:bg-white/20 border-white/20 rounded-full text-white border-1 rounded-full",
+    submit: "bg-white text-background hover:scale-105",
   };
 
   const sizeClasses = {
-    sm: "h-9 px-3 text-sm",
-    md: "h-10 py-2 px-4",
-    lg: "h-11 px-8",
+    reset: "",
+    sm: "px-2.5 py-1.5 text-sm",
+    md: "px-4 py-2",
+    lg: "px-8",
   };
 
   const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
