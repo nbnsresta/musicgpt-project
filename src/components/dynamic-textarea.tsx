@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 export const DynamicTextarea = ({
   value: defaultValue,
@@ -53,7 +54,10 @@ export const DynamicTextarea = ({
       }}
       placeholder={placeholder}
       rows={1}
-      className={`w-full resize-none placeholder:text-gray-400 border-gray-300 text-gray-200 p-5 rounded-lg outline-none bg-transparent ${className}`}
+      className={twMerge(
+        "w-full resize-none placeholder:text-gray-400 border-gray-300 text-gray-200 rounded-lg outline-none bg-transparent",
+        className
+      )}
       style={{
         minHeight: `${minHeight}px`,
         maxHeight: `${maxHeight}px`,
