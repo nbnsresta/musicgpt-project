@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
+import { Providers } from "../components/providers";
 
 export const metadata: Metadata = {
   title: "MusicGPT",
@@ -38,7 +39,7 @@ export default function RootLayout({
             </span>
           </Link>
         </header>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
-  fontFamily: {
-    sans: ["Inter, sans-serif"],
-  },
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Inter, sans-serif"],
+      },
       colors: {
         "greys-900": "#16191c",
         "greys-800": "#272a2e",

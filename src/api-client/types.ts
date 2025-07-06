@@ -18,4 +18,12 @@ export interface SearchParams {
   query: string;
   limit?: number;
   offset?: number;
-} 
+}
+
+export interface Voice {
+  id: string;
+  name: string;
+  imageUrl: string;
+  audioUrl: string;
+}
+
