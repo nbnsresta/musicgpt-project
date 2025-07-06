@@ -32,11 +32,21 @@ export default function Home() {
     setTool(value);
   };
 
+  const pageTitle = React.useMemo(() => {
+    if (tool === "create-anything") {
+      return "What song to create?";
+    }
+    const selectedToolOption = toolOptions.find(
+      (option) => option.value === tool
+    );
+    return selectedToolOption?.label;
+  }, [tool]);
+
   return (
     <main className="flex flex-col mt-16 ">
       <div className="flex mx-4 justify-center items-center min-h-[80vh]">
         <div className="flex max-w-200 gap-8 flex-col w-full min-h-48 items-center justify-center">
-          <h2 className="text-4xl text-white/80">What song to create?</h2>
+          <h2 className="text-4xl text-white/80">{pageTitle}</h2>
           <div className="flex flex-col rounded-3xl bg-greys-800 overflow-hidden w-full transition-[height] ease-in-out duration-300">
             <DynamicTextarea
               placeholder="Describe your song"
