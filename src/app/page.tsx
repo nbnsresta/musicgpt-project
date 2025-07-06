@@ -109,7 +109,7 @@ export default function Home() {
                         width={20}
                         height={20}
                       />
-                      <span>Instrumental</span>
+                      <span className="hidden sm:inline">Instrumental</span>
                     </Button>
                   </div>
 
@@ -127,7 +127,7 @@ export default function Home() {
                         width={20}
                         height={20}
                       />
-                      <span>Lyrics</span>
+                      <span className="hidden sm:inline">Lyrics</span>
                     </Button>
                   </div>
                 </div>
