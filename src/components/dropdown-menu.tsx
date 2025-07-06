@@ -45,20 +45,6 @@ export const DropdownMenu = ({
 
   const selectedItem = options.find((option) => option.value === value);
 
-  const defaultTrigger = (
-    <button
-      className={clsx(
-        "inline-flex items-center justify-between px-3 gap-1.5 h-9 text-sm rounded-full bg-transparent hover:bg-greys-700 outline-none",
-        disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
-        className
-      )}
-      disabled={disabled}
-    >
-      <span className="text-white">{getSelectedLabel()}</span>
-      <ChevronDownIcon className="h-4.5 w-4.5 text-white" />
-    </button>
-  );
-
   return (
     <BaseDropdownMenu.Root>
       <BaseDropdownMenu.Trigger asChild disabled={disabled} autoFocus={false}>
@@ -91,7 +77,7 @@ export const DropdownMenu = ({
               <BaseDropdownMenu.Item
                 key={option.value}
                 className={`relative flex items-center px-2.5 py-2 text-sm rounded-md cursor-pointer hover:bg-greys-900 focus:bg-greys-900 outline-none select-none text-gray-100`}
-                onSelect={(event) => {
+                onSelect={() => {
                   if (option.disabled) return;
                   handleSelect(option.value);
                 }}
