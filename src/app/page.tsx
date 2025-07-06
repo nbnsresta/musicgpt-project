@@ -1,21 +1,43 @@
 "use client";
 
 import React from "react";
-import { DynamicTextarea, Button, Collapse } from "../components";
+import { DynamicTextarea, Button, Collapse, DropdownMenu } from "../components";
 import Image from "next/image";
-import {
-  ArrowRightCircleIcon,
-  ArrowRightIcon,
-} from "@heroicons/react/16/solid";
+import { ArrowRightIcon } from "@heroicons/react/16/solid";
+import { DropdownOption } from "../components/dropdown-menu";
+
+const toolOptions = [
+  { value: "create-anything", label: "Create anything" },
+  { value: "tts", label: "Text to Speech" },
+];
+
+const renderTrigger = (item: DropdownOption) => {
+  return (
+    <span className="text-white">
+      {item.value === "create-anything" ? "Tools" : item.label}
+    </span>
+  );
+};
+
+const renderLabel = (item: DropdownOption) => {
+  return <span className="text-white">{item.label}</span>;
+};
 
 export default function Home() {
   const [isLyricsOpen, setIsLyricsOpen] = React.useState(false);
+
+  const [tool, setTool] = React.useState("create-anything");
+
+  const handleToolChange = (value: string) => {
+    setTool(value);
+  };
+
   return (
     <main className="flex flex-col mt-16 ">
       <div className="flex mx-4 justify-center items-center min-h-[80vh]">
         <div className="flex max-w-200 gap-8 flex-col w-full min-h-48 items-center justify-center">
           <h2 className="text-4xl text-white/80">What song to create?</h2>
-          <div className="flex flex-col rounded-3xl bg-foreground overflow-hidden w-full transition-[height] ease-in-out duration-300">
+          <div className="flex flex-col rounded-3xl bg-greys-800 overflow-hidden w-full transition-[height] ease-in-out duration-300">
             <DynamicTextarea
               placeholder="Describe your song"
               spellCheck={false}
@@ -29,7 +51,12 @@ export default function Home() {
             </Collapse>
             <div className="px-5 pb-5 flex flex-row justify-between">
               <div className="flex gap-2">
-                <Button asChild variant="outline" size="sm" className="gap-1">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="none"
+                  className="size-9"
+                >
                   <label>
                     <Image
                       src="/icons/icon-attachment.svg"
@@ -76,13 +103,24 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
-              <Button
-                variant="submit"
-                className="rounded-full size-9"
-                size="reset"
-              >
-                <ArrowRightIcon className="size-6" />
-              </Button>
+              <div className="flex gap-2 items-center">
+                <DropdownMenu
+                  placeholder="Tools"
+                  align="end"
+                  value={tool}
+                  options={toolOptions}
+                  renderTrigger={renderTrigger}
+                  renderLabel={renderLabel}
+                  onChange={handleToolChange}
+                />
+                <Button
+                  variant="submit"
+                  className="rounded-full size-9"
+                  size="none"
+                >
+                  <ArrowRightIcon className="size-6" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>

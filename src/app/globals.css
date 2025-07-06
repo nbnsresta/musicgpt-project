@@ -3,16 +3,10 @@ layer(base);
 
 @config '../../tailwind.config.js';
 @import "tailwindcss";
-@plugin "daisyui";
 
 :root {
-  @apply bg-background;
+  @apply bg-greys-900;
   font-family: Inter, Inter Fallback;
   font-style: normal;
   scroll-behavior: smooth;
 }
-
-/* @theme inline {
-  --color-background: var(--background);
-  --font-sans: var(--font-geist-sans);
-} */

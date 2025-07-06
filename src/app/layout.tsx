@@ -36,7 +36,7 @@ export default function RootLayout({
       >
         <header
           id="top"
-          className={`w-full fixed top-0 z-50 bg-background flex items-center justify-between px-6 py-4 backdrop-blur-md`}
+          className={`w-full fixed top-0 z-50 bg-greys-900 flex items-center justify-between px-6 py-4 backdrop-blur-md`}
         >
           <Link href="#top" className="flex items-center gap-3">
             <Image
