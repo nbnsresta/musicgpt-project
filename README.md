@@ -1,80 +1,80 @@
-# MusicGPT Clone - Turborepo
+# MusicGPT Project
 
-This is a [Turborepo](https://turbo.build/repo) monorepo containing a music discovery application.
+A modern AI-powered music creation and text-to-speech application built with Next.js, TypeScript, and Tailwind CSS.
 
-## What's inside?
+## Tech Stack
 
-This Turborepo uses [npm](https://www.npmjs.com/) as a package manager. It includes the following packages/apps:
+- **Framework**: [Next.js 15](https://nextjs.org/) with App Router
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **UI Components**: Custom components with [Radix UI](https://www.radix-ui.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **State Management**: [TanStack Query](https://tanstack.com/query)
+- **Icons**: [Heroicons](https://heroicons.com/)
+- **Database**: [Redis](https://redis.io/) for caching and session management
 
-### Apps
+## Getting Started
 
-- `web`: a [Next.js](https://nextjs.org/) app with TypeScript and Tailwind CSS
-- `server`: a [NestJS](https://nestjs.com/) API server with TypeScript
+### Prerequisites
 
-### Packages
+- Node.js 18+
+- npm or yarn
 
-- `ui`: a React component library built with TypeScript
-- `api-client`: a TypeScript package containing API client and music service utilities
+### Installation
 
-### Utilities
+1. Clone the repository:
 
-This Turborepo has some additional tools already set up for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-## Setup
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-npm run build
+```bash
+git clone <repository-url>
+cd musicgpt-clone
 ```
 
-### Develop
+2. Install dependencies:
 
-To develop all apps and packages, run the following command:
-
+```bash
+npm install
 ```
+
+3. Run the development server:
+
+```bash
 npm run dev
 ```
 
-### Remote Caching
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Turborepo can use a remote cache to share build cache across machines, enabling you to share build cache with your team and CI/CD pipelines.
+## Available Scripts
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have a Vercel account, you can [create one](https://vercel.com/signup), then enter the following commands:
+- `npm run dev` - Start the development server
+- `npm run build` - Build the application for production
+- `npm run start` - Start the production server
+- `npm run lint` - Run ESLint for code linting
 
-```
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview#personal-accounts).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## Project Structure
 
 ```
-npx turbo link
+src/
+├── api-client/          # API client and service utilities
+│   ├── api-client.ts    # Base API client configuration
+│   ├── music-service.ts # Music generation service
+│   ├── voice-service.ts # Text-to-speech service
+│   └── types.ts         # TypeScript type definitions
+├── app/                 # Next.js App Router
+│   ├── api/            # API routes
+│   │   ├── submit/     # Music submission endpoint
+│   │   └── voices/     # Voice selection endpoint
+│   ├── globals.css     # Global styles
+│   ├── layout.tsx      # Root layout component
+│   └── page.tsx        # Main application page
+├── components/         # Reusable UI components
+│   ├── button.tsx      # Button component
+│   ├── collapse.tsx    # Collapsible content component
+│   ├── dropdown-menu.tsx # Dropdown menu component
+│   ├── dynamic-textarea.tsx # Auto-resizing textarea
+│   ├── fade-scroll.tsx # Scroll animations
+│   ├── header.tsx      # Header component
+│   ├── text-to-speech.tsx # TTS interface
+│   └── providers.tsx   # React context providers
+└── hooks/              # Custom React hooks
+    └── useVoices.ts    # Voice selection hook
 ```
-
-## Useful Commands
-
-- `npm run build` - Build all apps and packages
-- `npm run dev` - Develop all apps and packages
-- `npm run start:server` - Start the NestJS API server in development mode
-- `npm run lint` - Lint all apps and packages
-- `npm run clean` - Clean all apps and packages
-- `npm run format` - Format all apps and packages
-
-## Learn More
-
-To learn more about the technologies used in this Turborepo, see the following docs:
-
-- [Turborepo](https://turbo.build/repo/docs)
-- [Next.js](https://nextjs.org/docs)
-- [NestJS](https://docs.nestjs.com/)
-- [TypeScript](https://www.typescriptlang.org/docs)
-- [Tailwind CSS](https://tailwindcss.com/docs)
