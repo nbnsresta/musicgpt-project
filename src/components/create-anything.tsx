@@ -91,7 +91,7 @@ export const CreateAnything = () => {
           <div className="group">
             <Button type="button" variant="outline" size="sm" className="gap-1">
               <Image
-                src="/icons/icon-insutrumental.svg"
+                src="/icons/icon-instrumental.svg"
                 alt="Instrumental"
                 width={20}
                 height={20}
