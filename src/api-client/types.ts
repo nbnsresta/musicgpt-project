@@ -25,7 +25,7 @@ type CreateAnythingPrompt = {
 
 type TextToSpeechPrompt = {
   type: "text-to-speech";
-  text: string;
+  prompt: string;
   voice: string;
 };
 

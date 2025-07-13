@@ -87,7 +87,7 @@ const TTSView = ({
     e.stopPropagation();
     const prompt: PromptSubmission = {
       type: "text-to-speech",
-      text,
+      prompt: text,
       voice: selected.id,
     };
     submitPrompt(prompt);
@@ -127,6 +127,7 @@ const TTSView = ({
                     return (
                       <button
                         key={voice.id}
+                        type="button"
                         onClick={() => setSelected(voice)}
                         className={`flex flex-col items-center group focus:outline-none`}
                       >
@@ -234,6 +235,7 @@ const SearchOptions = ({
         <MagnifyingGlassIcon className="select-none size-6 text-gray-300/35 group-focus-within:text-gray-300/60 transition-colors" />
         <input
           className="text-gray-300 bg-transparent outline-none w-full"
+          type="text"
           value={search}
           onChange={(e) => onSearch(e.target.value)}
         ></input>
