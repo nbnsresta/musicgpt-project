@@ -76,7 +76,7 @@ export const CreateAnything = () => {
             "flex absolute bottom-0 left-0 px-5 pb-5 flex-row gap-2 justify-between"
           )}
         >
-          <Button asChild variant="outline" size="none" className="size-9">
+          <Button asChild variant="outline" size="none" className="w-9 h-9">
             <label>
               <Image
                 src="/icons/icon-attachment.svg"
@@ -133,11 +133,11 @@ export const CreateAnything = () => {
         <Button
           variant="submit"
           type="submit"
-          className="rounded-full size-9"
+          className="rounded-full w-9 h-9"
           size="none"
           disabled={isPending || promptText.length === 0}
         >
-          <ArrowRightIcon className="size-6" />
+          <ArrowRightIcon className="w-6 h-6" />
         </Button>
       </motion.div>
     </motion.form>

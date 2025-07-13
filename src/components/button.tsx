@@ -26,8 +26,7 @@ export const Button = ({
     "inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background cursor-pointer";
 
   const variantClasses: Record<ButtonVariant, string> = {
-    outline:
-      "border border-input hover:bg-white/20 border-white/20 rounded-full text-white border-1 rounded-full",
+    outline: "border border-white/20 hover:bg-white/20 rounded-full text-white",
     submit: "bg-white text-greys-900 hover:scale-105",
   };
 

@@ -49,7 +49,7 @@ export const LanguageMenu = ({
         <Button
           variant="outline"
           className={clsx(
-            "inline-flex items-center justify-between px-3 gap-1.5 w-38 text-xs rounded-full bg-transparent hover:bg-greys-600 outline-none focus-visible:ring-0 focus-visible:ring-offset-0 h-full",
+            "inline-flex items-center justify-between px-3 gap-1.5 w-40 text-xs rounded-full bg-transparent hover:bg-greys-600 outline-none focus-visible:ring-0 focus-visible:ring-offset-0 h-full",
             className
           )}
         >
@@ -59,7 +59,7 @@ export const LanguageMenu = ({
             ) : null}
             <span>{selectedLanguage?.label || "All Languages"}</span>
           </span>
-          <ChevronDownIcon className="h-4.5 w-4.5 text-white" />
+          <ChevronDownIcon className="h-4 w-4 text-white" />
         </Button>
       </BaseDropdownMenu.Trigger>
 
@@ -69,10 +69,10 @@ export const LanguageMenu = ({
           sideOffset={4}
           align="end"
         >
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             <BaseDropdownMenu.Item
               key="all"
-              className={`relative flex flex-col px-2.5 py-2 text-sm rounded-lg cursor-pointer hover:bg-gray-200/20 focus:bg-greys-600 outline-none select-none text-gray-100`}
+              className={`relative flex flex-col px-2.5 py-1.5 text-sm rounded-lg cursor-pointer hover:bg-gray-200/20 focus:bg-greys-600 outline-none select-none text-gray-100`}
               onSelect={() => {
                 handleSelect("all");
               }}

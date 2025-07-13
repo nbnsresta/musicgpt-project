@@ -61,7 +61,7 @@ export const DropdownMenu = ({
               ? renderTrigger(selectedItem)
               : getSelectedLabel()}
           </span>
-          <ChevronDownIcon className="h-4.5 w-4.5 text-white" />
+          <ChevronDownIcon className="h-4 w-4 text-white" />
         </button>
       </BaseDropdownMenu.Trigger>
 

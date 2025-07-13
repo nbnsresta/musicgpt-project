@@ -102,8 +102,8 @@ const TTSView = ({
       className="relative"
       onSubmit={handleSubmit}
     >
-      <div className="flex overflow-hidden max-w-225 min-h-75 h-75 py-5 gap-[10%]">
-        <div className="flex-3 hidden sm:flex">
+      <div className="flex overflow-hidden max-w-225 h-75 py-5 gap-[10%]">
+        <div className="flex-[3] hidden sm:flex">
           {isLoading && !voices.length ? (
             <LoadingShimmer />
           ) : (
@@ -133,9 +133,9 @@ const TTSView = ({
                       >
                         <div
                           className={clsx(
-                            "size-11 object-cover rounded-full overflow-hidden flex items-center justify-center text-xl font-medium mb-2 transition-all duration-300 bg-greys-600 text-white",
+                            "w-11 h-11 object-cover rounded-full overflow-hidden flex items-center justify-center text-xl font-medium mb-2 transition-all duration-300 bg-greys-600 text-white",
                             {
-                              "ring-3 ring-orange-400 ring-offset-3 ring-offset-greys-800":
+                              "ring-2 ring-orange-400 ring-offset-2 ring-offset-greys-800":
                                 isActive,
                             }
                           )}
@@ -164,9 +164,9 @@ const TTSView = ({
           )}
         </div>
 
-        <div className="flex-2 flex flex-col px-5 gap-5">
+        <div className="flex-[2] flex flex-col px-5 gap-5">
           <div className="flex flex-row items-center gap-2">
-            <div className="size-11 object-cover overflow-hidden flex ">
+            <div className="w-11 h-11 object-cover overflow-hidden flex ">
               {selected.imageUrl ? (
                 <Image
                   key={selected.imageUrl}
@@ -177,7 +177,7 @@ const TTSView = ({
                   className="p-2 bg-greys-900 rounded-full object-contain"
                 />
               ) : (
-                <div className="rounded-full text-white justify-center text-xl bg-greys-600 font-medium flex size-full items-center">
+                <div className="rounded-full text-white justify-center text-xl bg-greys-600 font-medium flex w-full h-full items-center">
                   {getInitials(selected.name)}
                 </div>
               )}
@@ -187,7 +187,7 @@ const TTSView = ({
             </div>
           </div>
           <DynamicTextarea
-            className="w-full px-0 max-w-xl bg-transparent border-none outline-none text-gray-200 text-md placeholder-gray-400 resize-none"
+            className="w-full px-0 max-w-xl bg-transparent border-none outline-none text-gray-200 text-base placeholder-gray-400 resize-none"
             placeholder="Enter text.."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -207,11 +207,11 @@ const TTSView = ({
         <Button
           variant="submit"
           type="submit"
-          className="rounded-full size-9"
+          className="rounded-full w-9 h-9"
           size="none"
           disabled={isPending || text.length === 0}
         >
-          <ArrowRightIcon className="size-6" />
+          <ArrowRightIcon className="w-6 h-6" />
         </Button>
       </motion.div>
     </motion.form>
@@ -232,7 +232,7 @@ const SearchOptions = ({
   return (
     <div className="px-5 h-10 flex flex-row items-center gap-2">
       <label className="rounded-full flex-1 bg-greys-900 border border-gray-300/35 h-full items-center flex px-2 gap-2 focus-within:border-gray-300/60 group transition-colors">
-        <MagnifyingGlassIcon className="select-none size-6 text-gray-300/35 group-focus-within:text-gray-300/60 transition-colors" />
+        <MagnifyingGlassIcon className="select-none w-6 h-6 text-gray-300/35 group-focus-within:text-gray-300/60 transition-colors" />
         <input
           className="text-gray-300 bg-transparent outline-none w-full"
           type="text"

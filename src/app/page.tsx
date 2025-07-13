@@ -101,10 +101,9 @@ export default function Home() {
               />
               {/* <Button
                 variant="submit"
-                className="rounded-full size-9"
-                size="none"
+                className="rounded-full w-9 h-9"
               >
-                <ArrowRightIcon className="size-6" />
+                <ArrowRightIcon className="w-6 h-6" />
               </Button> */}
             </motion.div>
           </motion.div>

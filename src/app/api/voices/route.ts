@@ -8,6 +8,7 @@ export async function GET() {
     const { data: voices, error } = await supabase
       .from("Voices")
       .select("*")
+      .neq("id", "default")
       .order("name", { ascending: true });
 
     if (error) {
