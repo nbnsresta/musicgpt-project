@@ -16,8 +16,28 @@ import { useMutation } from "@tanstack/react-query";
 import { useToast } from "./toast-context";
 
 const LoadingShimmer = () => {
+  const renderVoice = (index: number) => {
+    return (
+      <div className="flex flex-col gap-2 items-center" key={index}>
+        <div className="w-11 h-11 bg-greys-600/50 animate-pulse rounded-full"></div>
+        <div className="w-full h-4 bg-greys-600/50 animate-pulse rounded-full"></div>
+      </div>
+    );
+  };
+
   return (
-    <div className="w-full h-full bg-greys-600/50 animate-pulse rounded-full" />
+    <div className="w-full h-full">
+      <div className="flex gap-2 w-full rounded-full h-9 px-5 shrink-0">
+        <div className="flex-[3] bg-greys-600/50 animate-pulse rounded-full"></div>
+        <div className="flex-[2] bg-greys-600/50 animate-pulse rounded-full"></div>
+      </div>
+      <div
+        className="grid gap-2 w-full rounded-full h-9 px-5 gap-x-4 gap-y-8 p-5"
+        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(72px, 1fr))" }}
+      >
+        {Array.from({ length: 8 }).map((_, index) => renderVoice(index))}
+      </div>
+    </div>
   );
 };
 
@@ -102,7 +122,7 @@ const TTSView = ({
       className="relative"
       onSubmit={handleSubmit}
     >
-      <div className="flex overflow-hidden max-w-225 h-75 py-5 gap-[10%]">
+      <div className="flex overflow-hidden max-w-225 h-[300px] py-5 gap-[10%]">
         <div className="flex-[3] hidden sm:flex">
           {isLoading && !voices.length ? (
             <LoadingShimmer />
@@ -230,7 +250,7 @@ const SearchOptions = ({
   onLanguageChange: (value: string) => void;
 }) => {
   return (
-    <div className="px-5 h-10 flex flex-row items-center gap-2">
+    <div className="px-5 h-9 shrink-0 flex flex-row items-center gap-2">
       <label className="rounded-full flex-1 bg-greys-900 border border-gray-300/35 h-full items-center flex px-2 gap-2 focus-within:border-gray-300/60 group transition-colors">
         <MagnifyingGlassIcon className="select-none w-6 h-6 text-gray-300/35 group-focus-within:text-gray-300/60 transition-colors" />
         <input

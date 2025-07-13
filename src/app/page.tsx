@@ -1,10 +1,8 @@
 "use client";
 
 import React from "react";
-import { Button, DropdownMenu } from "../components";
-import { ArrowRightIcon } from "@heroicons/react/16/solid";
+import { DropdownMenu } from "../components";
 import { DropdownOption } from "../components/dropdown-menu";
-import clsx from "clsx";
 import { TextToSpeech } from "../components/text-to-speech";
 import { motion } from "framer-motion";
 import { CreateAnything } from "../components/create-anything";
@@ -41,6 +39,13 @@ const sizeConfig = {
   },
 };
 
+const backgroundGradients = [
+  "radial-gradient(circle at 50% -10%, rgba(59, 130, 246, 0.2) 0%, rgba(147, 51, 234, 0.2) 50%, transparent 100%)",
+  "radial-gradient(circle at 50% -10%, rgba(147, 51, 234, 0.2) 0%, rgba(236, 72, 153, 0.2) 50%, transparent 100%)",
+  "radial-gradient(circle at 50% -10%, rgba(236, 72, 153, 0.2) 0%, rgba(59, 130, 246, 0.2) 50%, transparent 100%)",
+  "radial-gradient(circle at 50% -10%, rgba(59, 130, 246, 0.2) 0%, rgba(147, 51, 234, 0.2) 50%, transparent 100%)",
+];
+
 export default function Home() {
   const [tool, setTool] = React.useState<Tool>("create-anything");
 
@@ -56,23 +61,33 @@ export default function Home() {
   };
 
   const pageTitle = React.useMemo(() => {
-    if (tool === "create-anything") {
-      return "What song to create?";
-    }
-    const selectedToolOption = toolOptions.find(
-      (option) => option.value === tool
-    );
-    return selectedToolOption?.label;
+    return tool === "create-anything"
+      ? "What song to create?"
+      : toolOptions.find((option) => option.value === tool)?.label;
   }, [tool]);
 
   return (
-    <main className="flex flex-col mt-16">
+    <main className="flex flex-col mt-16 relative">
+      <motion.div
+        className="fixed inset-0 rounded-3xl h-screen w-screen"
+        style={{
+          background: backgroundGradients[0],
+        }}
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: [0, 0.3, 0.3, 0.2],
+          background: backgroundGradients,
+        }}
+        transition={{
+          duration: 20,
+          times: [0, 0.2, 0.8, 1],
+          ease: "easeInOut",
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+      />
       <div className="flex mx-4 flex-col justify-center items-center min-h-[80vh]">
-        <div
-          className={clsx(
-            "flex flex-col items-center gap-8 justify-center w-full"
-          )}
-        >
+        <div className="flex flex-col items-center gap-8 justify-center w-full">
           <h2 className="text-4xl text-white/80">{pageTitle}</h2>
           <motion.div
             layout
@@ -99,12 +114,6 @@ export default function Home() {
                 renderLabel={renderLabel}
                 onChange={handleToolChange}
               />
-              {/* <Button
-                variant="submit"
-                className="rounded-full w-9 h-9"
-              >
-                <ArrowRightIcon className="w-6 h-6" />
-              </Button> */}
             </motion.div>
           </motion.div>
         </div>
