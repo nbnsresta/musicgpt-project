@@ -9,3 +9,14 @@
   font-style: normal;
   scroll-behavior: smooth;
 }
+
+.scrollbar::-webkit-scrollbar {
+  background: transparent;
+  width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #3f444a;
+  border-radius: 100px;
+  width: 4px;
+}

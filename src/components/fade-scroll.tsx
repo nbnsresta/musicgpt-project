@@ -2,9 +2,9 @@ import React from "react";
 import clsx from "clsx";
 
 const fadeScrollBefore =
-  "before:content=[''] before:absolute before:top-0 before:w-full before:h-8 z-10 before:bg-linear-to-b before:from-greys-800";
+  "before:content=[''] before:absolute before:top-0 before:w-full before:h-12 z-10 before:bg-linear-to-b before:from-greys-800";
 const fadeScrollAfter =
-  "after:content=[''] after:absolute after:bottom-0 after:w-full after:h-8 z-10 after:bg-linear-to-t after:from-greys-800";
+  "after:content=[''] after:absolute after:bottom-0 after:w-full after:h-12 z-10 after:bg-linear-to-t after:from-greys-800";
 
 export const FadeScroll = ({
   children,
@@ -14,14 +14,15 @@ export const FadeScroll = ({
   innerClassName?: string;
 }) => {
   const parentRef = React.useRef<HTMLDivElement | null>(null);
-  const [showLeftGradient, setShowTopGradient] = React.useState(false);
-  const [showRightGradient, setShowBottomGradient] = React.useState(false);
+  const [showTopGradient, setShowTopGradient] = React.useState(false);
+  const [showBottomGradient, setShowBottomGradient] = React.useState(false);
 
   const handleVisibility = React.useCallback((element: HTMLDivElement) => {
     const { scrollTop, scrollHeight, clientHeight } = element;
     setShowTopGradient(scrollTop > 0);
     setShowBottomGradient(scrollTop + clientHeight < scrollHeight);
   }, []);
+
   const onScroll: React.UIEventHandler<HTMLDivElement> = React.useCallback(
     (e) => {
       handleVisibility(e.currentTarget);
@@ -42,10 +43,10 @@ export const FadeScroll = ({
         fadeScrollBefore,
         fadeScrollAfter,
         {
-          "before:visible": showLeftGradient,
-          "after:visible": showRightGradient,
-          "before:invisible": !showLeftGradient,
-          "after:invisible": !showRightGradient,
+          "before:visible": showTopGradient,
+          "after:visible": showBottomGradient,
+          "before:invisible": !showTopGradient,
+          "after:invisible": !showBottomGradient,
         }
       )}
     >
@@ -53,6 +54,9 @@ export const FadeScroll = ({
         ref={parentRef}
         className={clsx("flex flex-1 w-full overflow-y-scroll", innerClassName)}
         onScrollCapture={onScroll}
+        style={{
+          scrollbarColor: "red",
+        }}
       >
         {children}
       </div>
