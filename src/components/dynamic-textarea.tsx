@@ -4,7 +4,7 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 
 export const DynamicTextarea = ({
-  value: defaultValue,
+  value,
   onChange,
   placeholder = "Start typing...",
   className = "",
@@ -18,7 +18,6 @@ export const DynamicTextarea = ({
   }
 >) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
-  const [value, setValue] = React.useState(defaultValue);
 
   React.useEffect(() => {
     if (textareaRef.current) {
@@ -48,10 +47,7 @@ export const DynamicTextarea = ({
     <textarea
       ref={textareaRef}
       value={value}
-      onChange={(e) => {
-        setValue(e.target.value);
-        onChange?.(e);
-      }}
+      onChange={onChange}
       placeholder={placeholder}
       rows={1}
       className={twMerge(

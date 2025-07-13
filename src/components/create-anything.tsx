@@ -9,15 +9,26 @@ import { ArrowRightIcon } from "@heroicons/react/16/solid";
 import { PromptSubmission } from "../api-client/types";
 import { promptService } from "../api-client";
 import { useMutation } from "@tanstack/react-query";
+import { useToast } from "./toast-context";
 
 export const CreateAnything = () => {
   const [isLyricsOpen, setIsLyricsOpen] = React.useState(false);
   const [promptText, setPromptText] = React.useState("");
   const [lyricsText, setLyricsText] = React.useState("");
 
+  const toast = useToast();
+
   const { mutate: submitPrompt, isPending } = useMutation({
     mutationFn: (prompt: PromptSubmission) =>
       promptService.submitPrompt(prompt),
+    onSuccess: () => {
+      toast.success("Request submitted successfully");
+      setLyricsText("");
+      setPromptText("");
+    },
+    onError: () => {
+      toast.error("Failed to create request");
+    },
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -124,7 +135,7 @@ export const CreateAnything = () => {
           type="submit"
           className="rounded-full size-9"
           size="none"
-          disabled={isPending}
+          disabled={isPending || promptText.length === 0}
         >
           <ArrowRightIcon className="size-6" />
         </Button>

@@ -13,6 +13,7 @@ import { LanguageMenu } from "./language-menu";
 import { Button } from "./button";
 import { promptService } from "../api-client";
 import { useMutation } from "@tanstack/react-query";
+import { useToast } from "./toast-context";
 
 const LoadingShimmer = () => {
   return (
@@ -47,10 +48,11 @@ const TTSView = ({
   voices: Voice[];
   isLoading: boolean;
 }) => {
+  const toast = useToast();
+
   const [selected, setSelected] = useState<Voice>(defaultVoice);
   const [text, setText] = useState("");
   const [language, setLanguage] = useState("all");
-
   const onLanguageChange = (value: string) => {
     setLanguage(value);
   };
@@ -63,6 +65,13 @@ const TTSView = ({
   const { mutate: submitPrompt, isPending } = useMutation({
     mutationFn: (prompt: PromptSubmission) =>
       promptService.submitPrompt(prompt),
+    onSuccess: () => {
+      setText("");
+      toast.success("Request submitted successfully");
+    },
+    onError: () => {
+      toast.error("Failed to create request");
+    },
   });
 
   const filteredVoices = React.useMemo(
@@ -79,7 +88,6 @@ const TTSView = ({
     const prompt: PromptSubmission = {
       type: "text-to-speech",
       text,
-      language,
       voice: selected.id,
     };
     submitPrompt(prompt);
@@ -200,7 +208,7 @@ const TTSView = ({
           type="submit"
           className="rounded-full size-9"
           size="none"
-          disabled={isPending}
+          disabled={isPending || text.length === 0}
         >
           <ArrowRightIcon className="size-6" />
         </Button>
