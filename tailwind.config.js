@@ -9,7 +9,8 @@ const config = {
       colors: {
         "greys-900": "#16191c",
         "greys-800": "#272a2e",
-        "greys-700": "#3f444a",
+        "greys-700": "#303438",
+        "greys-600": "#3f444a",
       },
     },
   },

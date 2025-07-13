@@ -69,7 +69,7 @@ export const DropdownMenu = ({
         <BaseDropdownMenu.Content
           align={align}
           side={side}
-          className="z-50 bg-greys-700/20 backdrop-blur-sm px-3 py-3 rounded-lg border border-greys-700 shadow-lg min-w-[200px] max-h-60"
+          className="z-50 bg-greys-600/20 backdrop-blur-sm px-3 py-3 rounded-lg border border-greys-700 shadow-lg min-w-[200px] max-h-60"
           sideOffset={4}
         >
           {options.map((option) => {

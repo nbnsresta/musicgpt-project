@@ -4,16 +4,6 @@ export interface ApiResponse<T = any> {
   message?: string;
 }
 
-export interface MusicTrack {
-  id: string;
-  title: string;
-  artist: string;
-  album?: string;
-  duration: number;
-  url: string;
-  coverImage?: string;
-}
-
 export interface SearchParams {
   query: string;
   limit?: number;
@@ -27,3 +17,17 @@ export interface Voice {
   audioUrl: string;
 }
 
+type CreateAnythingPrompt = {
+  type: "create-anything";
+  prompt: string;
+  lyrics?: string;
+};
+
+type TextToSpeechPrompt = {
+  type: "text-to-speech";
+  text: string;
+  language: string;
+  voice: string;
+};
+
+export type PromptSubmission = CreateAnythingPrompt | TextToSpeechPrompt;

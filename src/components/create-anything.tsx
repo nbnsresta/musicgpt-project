@@ -5,21 +5,48 @@ import { Collapse } from "./collapse";
 import clsx from "clsx";
 import Image from "next/image";
 import { Button } from "./button";
+import { ArrowRightIcon } from "@heroicons/react/16/solid";
+import { PromptSubmission } from "../api-client/types";
+import { promptService } from "../api-client";
+import { useMutation } from "@tanstack/react-query";
 
 export const CreateAnything = () => {
   const [isLyricsOpen, setIsLyricsOpen] = React.useState(false);
+  const [promptText, setPromptText] = React.useState("");
+  const [lyricsText, setLyricsText] = React.useState("");
+
+  const { mutate: submitPrompt, isPending } = useMutation({
+    mutationFn: (prompt: PromptSubmission) =>
+      promptService.submitPrompt(prompt),
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const prompt: PromptSubmission = {
+      type: "create-anything",
+      prompt: promptText,
+      lyrics: lyricsText,
+    };
+    submitPrompt(prompt);
+  };
 
   return (
-    <motion.div
+    <motion.form
+      layout
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
+      className="max-w-200 relative"
+      onSubmit={handleSubmit}
     >
-      <div className="flex flex-col min-h-32 w-200 pb-14">
+      <div className="flex flex-col min-h-32 max-w-200 pb-14 w-full">
         <DynamicTextarea
           placeholder="Describe your song"
           spellCheck={false}
           className="p-5"
+          value={promptText}
+          onChange={(e) => setPromptText(e.target.value)}
         />
 
         <Collapse isOpen={isLyricsOpen} className="flex flex-col">
@@ -28,6 +55,8 @@ export const CreateAnything = () => {
             placeholder="Write your lyrics"
             spellCheck={false}
             className="p-5"
+            value={lyricsText}
+            onChange={(e) => setLyricsText(e.target.value)}
           />
         </Collapse>
 
@@ -81,6 +110,25 @@ export const CreateAnything = () => {
           </div>
         </div>
       </div>
-    </motion.div>
+
+      <motion.div
+        layout
+        className="absolute bottom-5 right-5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ delay: 0.1, duration: 0.2 }}
+      >
+        <Button
+          variant="submit"
+          type="submit"
+          className="rounded-full size-9"
+          size="none"
+          disabled={isPending}
+        >
+          <ArrowRightIcon className="size-6" />
+        </Button>
+      </motion.div>
+    </motion.form>
   );
 };

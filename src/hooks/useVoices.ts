@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { VoiceService } from "../api-client/voice-service";
+import { voiceService } from "../api-client";
 import type { Voice } from "../api-client/types";
-
-const voiceService = new VoiceService();
 
 export function useVoices() {
   return useQuery({

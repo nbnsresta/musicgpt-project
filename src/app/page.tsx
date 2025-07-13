@@ -28,27 +28,32 @@ const renderLabel = (item: DropdownOption) => {
   return <span className="text-white">{item.label}</span>;
 };
 
+const sizeConfig = {
+  "create-anything": {
+    height: "auto",
+    maxWidth: 800,
+    minHeight: 128,
+  },
+  tts: {
+    height: "auto",
+    maxWidth: 900,
+    minHeight: 300,
+  },
+};
+
 export default function Home() {
   const [tool, setTool] = React.useState<Tool>("create-anything");
 
-  const handleToolChange = (value: string) => {
-    setTool(value as Tool);
-    if (value === "tts") {
-      setContainerSize({ height: 300, width: 900, minHeight: "auto" });
-    } else {
-      setContainerSize({ height: 128, width: 800, minHeight: 128 });
-    }
-  };
-
   const [containerSize, setContainerSize] = React.useState<{
     height: number | string;
-    width: number | string;
+    maxWidth: number | string;
     minHeight: number | string;
-  }>({
-    height: "auto",
-    width: 800,
-    minHeight: 128,
-  });
+  }>(sizeConfig[tool]);
+
+  const handleToolChange = (value: string) => {
+    setTool(value as Tool);
+    setContainerSize(sizeConfig[value as Tool]);
+  };
 
   const pageTitle = React.useMemo(() => {
     if (tool === "create-anything") {
@@ -62,18 +67,29 @@ export default function Home() {
 
   return (
     <main className="flex flex-col mt-16">
-      <div className="flex mx-4 justify-center items-center min-h-[80vh]">
+      <div className="flex mx-4 flex-col justify-center items-center min-h-[80vh]">
         <div
-          className={clsx("flex gap-8 flex-col items-center justify-center")}
+          className={clsx(
+            "flex flex-col items-center gap-8 justify-center w-full"
+          )}
         >
           <h2 className="text-4xl text-white/80">{pageTitle}</h2>
           <motion.div
+            layout
+            initial={containerSize}
             animate={containerSize}
-            className="bg-greys-800 rounded-3xl relative overflow-hidden"
+            transition={{ duration: 0.2 }}
+            className="bg-greys-800 rounded-3xl relative overflow-hidden w-full"
           >
             {tool === "create-anything" && <CreateAnything />}
             {tool === "tts" && <TextToSpeech />}
-            <div className="px-5 pb-5 absolute bottom-0 right-0 flex gap-2 items-center">
+            <motion.div
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+              className="px-5 mr-12 pb-5 absolute bottom-0 right-0 flex gap-2 items-center"
+            >
               <DropdownMenu
                 placeholder="Tools"
                 align="end"
@@ -83,14 +99,14 @@ export default function Home() {
                 renderLabel={renderLabel}
                 onChange={handleToolChange}
               />
-              <Button
+              {/* <Button
                 variant="submit"
                 className="rounded-full size-9"
                 size="none"
               >
                 <ArrowRightIcon className="size-6" />
-              </Button>
-            </div>
+              </Button> */}
+            </motion.div>
           </motion.div>
         </div>
       </div>
