@@ -4,9 +4,8 @@ import { getSupabaseClient } from "../../../lib/supabase";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { type, prompt, voice, userId } = body;
+    const { type, prompt, voice, lyrics, userId } = body;
 
-    // Validate required fields
     if (!type || !prompt) {
       return NextResponse.json(
         { error: "Prompt text is required" },
@@ -23,6 +22,7 @@ export async function POST(req: NextRequest) {
         type,
         prompt,
         voice,
+        lyrics,
         user_id: userId,
       })
       .select()
